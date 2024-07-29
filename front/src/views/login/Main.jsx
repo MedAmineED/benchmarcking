@@ -21,8 +21,6 @@ function Main() {
 
   const loginClick = ()=> {
     axios.post("http://localhost:8000/api/auth/login", loginUser).then((result)=>{
-      console.log(result.data);
-      console.log(result.data.isAdmin);
       if(result.data.isAdmin){
         localStorage.setItem("userData", result.data.token);
         localStorage.setItem("isAdmin", result.data.isAdmin);
@@ -32,10 +30,10 @@ function Main() {
         localStorage.setItem("isAdmin", result.data.isAdmin);
         navigate('/user-menu');
       }
-    }
-  ).catch((error)=> {
-    console.log(error);
-  })
+    } 
+    ).catch((error)=> {
+      console.log(error);
+    })
   }
   useEffect(() => {
     dom("body").removeClass("main").removeClass("error-page").addClass("login");
@@ -121,7 +119,9 @@ function Main() {
                     onClick={()=>{loginClick()}}>
                     Login
                   </button>
-                  <button className="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">
+                  <button 
+                      onClick={()=> {navigate('/register')}}
+                      className="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">
                     Register
                   </button>
                 </div>
